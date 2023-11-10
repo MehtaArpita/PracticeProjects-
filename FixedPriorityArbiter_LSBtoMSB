@@ -1,1 +1,28 @@
-/FixedPriorityArbiter_LSBtoMSB
+//FixedPriorityArbiter_LSBtoMSB
+
+module FixedPriorityArbiter # (parameter req_size = 8) (
+	// Requets ports 
+	input 	   [req_size-1 : 0] i_request,
+	output reg [req_size-1 : 0] o_request
+
+	);
+
+	reg [req_size-1 : 0] o_request_i;
+
+	genvar i;
+	
+	always_comb()
+	begin
+		for (i = 0; i < req_size; i++)
+		begin 
+			if (i_requests[i] == 1'b1)
+			begin 
+				o_request = 'b0;
+				o_request[i] = 1'b1;
+				break; 
+			end
+			else 
+				o_request = 'b0;
+		end 
+ 	end
+endmodule
